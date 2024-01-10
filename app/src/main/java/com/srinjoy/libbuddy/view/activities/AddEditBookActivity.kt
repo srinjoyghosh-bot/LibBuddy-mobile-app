@@ -131,7 +131,7 @@ class AddEditBookActivity : AppCompatActivity() {
     }
 
 
-    fun setInfoIntoForm() {
+    private fun setInfoIntoForm() {
         mBinding.etBookName.setText(mBook!!.name)
         mBinding.etAuthor.setText(mBook!!.author)
         mBinding.etPublisher.setText(mBook!!.publisher)

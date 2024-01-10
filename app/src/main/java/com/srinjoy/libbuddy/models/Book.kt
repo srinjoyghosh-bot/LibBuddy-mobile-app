@@ -13,6 +13,10 @@ object Book {
         val books: List<Book>
     )
 
+    data class DeleteResponseModel(
+        val message: String
+    )
+
     @Parcelize
     data class Book(
         val author: String,

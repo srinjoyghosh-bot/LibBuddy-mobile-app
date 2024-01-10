@@ -33,4 +33,5 @@
     <string name="title_edit_book">Edit Book</string>
     <string name="msg_book_added">Book added!</string>
     <string name="msg_book_updated">Book updated successfully!</string>
+    <string name="msg_book_deleted">Book deleted!</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.srinjoy.libbuddy.view.fragments
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.core.Constants
@@ -145,6 +147,19 @@ class BookDetailsFragment : Fragment() {
                 }
             }
         }
+        mViewModel.deleteSuccess.observe(viewLifecycleOwner) { value ->
+            value?.let {
+                if (value) {
+
+                    findNavController().popBackStack()
+                    Toast.makeText(
+                        requireActivity(),
+                        getString(R.string.msg_book_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
         mViewModel.error.observe(viewLifecycleOwner) { value ->
             value?.let {
                 if (value) {
@@ -203,7 +218,7 @@ class BookDetailsFragment : Fragment() {
         return when (item.itemId) {
 
             R.id.action_delete_book -> {
-                Toast.makeText(requireActivity(), "Delete Book", Toast.LENGTH_SHORT).show()
+                mViewModel.deleteBook(mBook.id!!, this@BookDetailsFragment)
                 true
             }
 

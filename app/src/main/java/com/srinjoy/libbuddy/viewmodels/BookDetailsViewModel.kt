@@ -1,6 +1,7 @@
 package com.srinjoy.libbuddy.viewmodels
 
 import android.app.Activity
+import android.widget.MultiAutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class BookDetailsViewModel(
 
     val book = MutableLiveData<Book.Book>()
     val bookRequestSuccess = MutableLiveData<Boolean>()
+    val deleteSuccess = MutableLiveData<Boolean>()
 
     fun getBook(id: String, showLoader: Boolean = true) {
         if (showLoader)
@@ -60,7 +62,7 @@ class BookDetailsViewModel(
                 .subscribeWith(object :
                     DisposableSingleObserver<Student.BorrowRequestResponseModel>() {
                     override fun onSuccess(t: Student.BorrowRequestResponseModel) {
-                        bookRequestSuccess.value=true
+                        bookRequestSuccess.value = true
                         stopLoading()
                     }
 
@@ -69,6 +71,26 @@ class BookDetailsViewModel(
                         setError(e.message.toString())
                     }
 
+                })
+        )
+    }
+
+    fun deleteBook(id: String, fragment: Fragment) {
+        startLoading()
+        val token = (fragment.activity?.application as LibraryApplication?)!!.prefs.token
+        addDisposable(
+            adminRepository!!.deleteBook(id, "Bearer $token").subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<Book.DeleteResponseModel>() {
+                    override fun onSuccess(t: Book.DeleteResponseModel) {
+                        stopLoading()
+                        deleteSuccess.value=true
+                    }
+
+                    override fun onError(e: Throwable) {
+                        stopLoading()
+                        setError(e.message)
+                    }
                 })
         )
     }

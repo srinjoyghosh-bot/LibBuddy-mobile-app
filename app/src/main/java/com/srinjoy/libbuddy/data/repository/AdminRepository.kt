@@ -17,4 +17,8 @@ class AdminRepository(private val apiService: LibraryApiService) {
     fun addBook(book: Book.Book, token: String): Single<Book.AddResponseModel> {
         return apiService.addBook(book, token)
     }
+
+    fun deleteBook(id: String, token: String): Single<Book.DeleteResponseModel> {
+        return apiService.deleteBook(id, token)
+    }
 }

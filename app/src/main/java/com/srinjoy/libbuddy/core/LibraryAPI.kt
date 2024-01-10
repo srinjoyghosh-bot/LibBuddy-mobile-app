@@ -5,6 +5,7 @@ import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -46,4 +47,10 @@ interface LibraryAPI {
         @Body data: Book.Book,
         @Header(Constants.TOKEN_HEADER) token: String
     ): Single<Book.AddResponseModel>
+
+    @DELETE(Constants.BOOK_ENDPOINT + Constants.DELETE_ENDPOINT)
+    fun deleteBook(
+        @Query("id") id: String,
+        @Header(Constants.TOKEN_HEADER) token: String
+    ): Single<Book.DeleteResponseModel>
 }

@@ -62,4 +62,8 @@ class LibraryApiService {
     fun addBook(data: Book.Book, token: String): Single<Book.AddResponseModel> {
         return api.addBook(data, token)
     }
+
+    fun deleteBook(id: String,token: String): Single<Book.DeleteResponseModel> {
+        return api.deleteBook(id,token)
+    }
 }
