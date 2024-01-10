@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_nav"
+    app:startDestination="@id/nav_all_books"
+    >
+    <fragment
+        android:id="@+id/nav_all_books"
+        android:name="com.srinjoy.libbuddy.view.fragments.student.StudentBooksFragment"
+        android:label="@string/title_books"
+        tools:layout="@layout/fragment_student_books"
+        >
+
+        <action
+            android:id="@+id/action_nav_all_books_to_bookDetailsFragment"
+            app:destination="@id/bookDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.srinjoy.libbuddy.view.fragments.student.StudentProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_student_profile" />
+    <fragment
+        android:id="@+id/bookDetailsFragment"
+        android:name="com.srinjoy.libbuddy.view.fragments.BookDetailsFragment"
+        android:label="@string/title_book_details"
+        tools:layout="@layout/fragment_book_details"
+        >
+    </fragment>
+</navigation>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">LibBuddy</string>
+    <string name="title_books">Books</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_students">Students</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_requests">Requests</string>
+    <string name="msg_no_books">No books available</string>
+    <string name="image_contentDescription">image</string>
+    <string name="title_book_details">Book Details</string>
+    <string name="lbl_request_book">Request Book</string>
+    <string name="msg_book_unavailable">This book is current unavailable for borrowing</string>
+    <string name="msg_book_requested">Book requested!</string>
+    <string name="msg_no_books_issued">No books issued yet!</string>
+    <string name="msg_please_wait">Please wait</string>
+    <string name="title_fine">Fine</string>
+    <string name="title_history">History</string>
+    <string name="val_fine">Rs %s</string>
+    <string name="fab_description">Add Book</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_book_name">Name</string>
+    <string name="hint_book_name">Enter book name</string>
+    <string name="lbl_author">Author</string>
+    <string name="hint_author">Enter author name</string>
+    <string name="lbl_publisher">Publisher</string>
+    <string name="hint_publisher">Enter publisher name</string>
+    <string name="lbl_book_description">Description</string>
+    <string name="hint_book_descripiton">Describe the book</string>
+    <string name="lbl_save">Save</string>
+    <string name="err_book_form">Provide proper %s</string>
+    <string name="title_add_book">Add Book</string>
+    <string name="title_edit_book">Edit Book</string>
+    <string name="msg_book_added">Book added!</string>
+    <string name="msg_book_updated">Book updated successfully!</string>
+</resources>
