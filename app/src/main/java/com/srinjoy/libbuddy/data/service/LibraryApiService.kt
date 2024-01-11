@@ -62,11 +62,23 @@ class LibraryApiService {
         return api.addBook(data, token)
     }
 
-    fun deleteBook(id: String, token: String): Single<Book.DeleteResponseModel> {
+    fun deleteBook(id: String, token: String): Single<Book.DeleteIssueResponseModel> {
         return api.deleteBook(id, token)
     }
 
     fun editBook(book: Book.Book, token: String): Single<Book.ResponseModel> {
         return api.editBook(data = book, token = token)
+    }
+
+    fun getRequests(token: String): Single<Admin.AllRequestsModel> {
+        return api.getRequests(token)
+    }
+
+    fun issueBook(id: String,token: String) : Single<Book.DeleteIssueResponseModel>{
+        return api.issueBook(id, token)
+    }
+
+    fun rejectBookIssue(id: String,token: String) : Single<Book.DeleteIssueResponseModel>{
+        return api.rejectBookIssue(id, token)
     }
 }

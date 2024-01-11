@@ -22,6 +22,9 @@ interface LibraryAPI {
     @POST(Constants.ADMIN_ENDPOINT + Constants.LOGIN_ENDPOINT)
     fun loginAdmin(@Body bodyDataModel: Admin.BodyDataModel): Single<Admin.LoginResponseModel>
 
+    @GET(Constants.ADMIN_ENDPOINT + Constants.REQUEST_ENDPOINT)
+    fun getRequests(@Header(Constants.TOKEN_HEADER) token: String): Single<Admin.AllRequestsModel>
+
     @POST(Constants.STUDENT_ENDPOINT + Constants.ADD_ENDPOINT)
     fun addStudent(@Body bodyDataModel: Student.StudentBodyDataModel): Single<Student.AddResponseModel>
 
@@ -53,11 +56,17 @@ interface LibraryAPI {
     fun deleteBook(
         @Query("id") id: String,
         @Header(Constants.TOKEN_HEADER) token: String
-    ): Single<Book.DeleteResponseModel>
+    ): Single<Book.DeleteIssueResponseModel>
 
     @PUT(Constants.BOOK_ENDPOINT + Constants.EDIT_ENDPOINT)
     fun editBook(
         @Body data: Book.Book,
         @Header(Constants.TOKEN_HEADER) token: String
     ): Single<Book.ResponseModel>
+
+    @PUT(Constants.BOOK_ENDPOINT+Constants.ISSUE_ENDPOINT)
+    fun issueBook(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.DeleteIssueResponseModel>
+
+    @PUT(Constants.BOOK_ENDPOINT+Constants.REJECT_ISSUE_ENDPOINT)
+    fun rejectBookIssue(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.DeleteIssueResponseModel>
 }

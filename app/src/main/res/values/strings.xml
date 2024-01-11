@@ -34,4 +34,7 @@
     <string name="msg_book_added">Book added!</string>
     <string name="msg_book_updated">Book updated successfully!</string>
     <string name="msg_book_deleted">Book deleted!</string>
+    <string name="lbl_no_requests">No borrow requests made !</string>
+    <string name="msg_request_approved">Borrow request approved!</string>
+    <string name="msg_request_rejected">Borrow request rejected!</string>
 </resources>

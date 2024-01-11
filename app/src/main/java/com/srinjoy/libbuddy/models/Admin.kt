@@ -23,4 +23,8 @@ object Admin {
         val email: String,
         val password: String,
     )
+
+    data class AllRequestsModel(
+        val requests:List<Book.IssueDetails>
+    )
 }

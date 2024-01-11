@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.data.repository.StudentRepository
+import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import com.srinjoy.libbuddy.view.fragments.student.StudentProfileFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -16,7 +17,7 @@ class StudentProfileViewModel(private val studentRepository: StudentRepository) 
 
     var student = MutableLiveData<Student.Student>()
     var fine = MutableLiveData<Double>()
-    var history = MutableLiveData<List<Student.IssueDetails>>()
+    var history = MutableLiveData<List<Book.IssueDetails>>()
     fun getProfile(fragment: StudentProfileFragment, showLoader: Boolean = true) {
         if (showLoader)
             startLoading()

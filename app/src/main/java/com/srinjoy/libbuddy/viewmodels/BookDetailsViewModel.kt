@@ -1,7 +1,6 @@
 package com.srinjoy.libbuddy.viewmodels
 
 import android.app.Activity
-import android.widget.MultiAutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -81,8 +80,8 @@ class BookDetailsViewModel(
         addDisposable(
             adminRepository!!.deleteBook(id, "Bearer $token").subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.DeleteResponseModel>() {
-                    override fun onSuccess(t: Book.DeleteResponseModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.DeleteIssueResponseModel>() {
+                    override fun onSuccess(t: Book.DeleteIssueResponseModel) {
                         stopLoading()
                         deleteSuccess.value=true
                     }

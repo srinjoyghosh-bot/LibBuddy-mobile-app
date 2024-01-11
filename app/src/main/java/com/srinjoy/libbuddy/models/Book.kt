@@ -13,7 +13,7 @@ object Book {
         val books: List<Book>
     )
 
-    data class DeleteResponseModel(
+    data class DeleteIssueResponseModel(
         val message: String
     )
 
@@ -29,4 +29,14 @@ object Book {
         val publisher: String,
         val updatedAt: String? = null
     ) : Parcelable
+
+    data class IssueDetails(
+        val book_id: String,
+        val createdAt: String,
+        val id: Int,
+        val status: String,
+        val studentEnrollmentId: Int,
+        val student_id: Int,
+        val return_date: Any
+    )
 }

@@ -18,11 +18,23 @@ class AdminRepository(private val apiService: LibraryApiService) {
         return apiService.addBook(book, token)
     }
 
-    fun deleteBook(id: String, token: String): Single<Book.DeleteResponseModel> {
+    fun deleteBook(id: String, token: String): Single<Book.DeleteIssueResponseModel> {
         return apiService.deleteBook(id, token)
     }
 
     fun editBook(book: Book.Book, token: String): Single<Book.ResponseModel> {
         return apiService.editBook(book, token)
+    }
+
+    fun getRequests(token: String) : Single<Admin.AllRequestsModel>{
+        return apiService.getRequests(token)
+    }
+
+    fun approveBorrowRequest(id: String,token: String):Single<Book.DeleteIssueResponseModel>{
+        return apiService.issueBook(id, token)
+    }
+
+    fun rejectBorrowRequest(id: String,token: String):Single<Book.DeleteIssueResponseModel>{
+        return apiService.rejectBookIssue(id, token)
     }
 }

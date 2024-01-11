@@ -40,19 +40,11 @@ object Student {
     )
 
     data class BorrowRequestResponseModel(
-        val issue_details: IssueDetails,
+        val issue_details: Book.IssueDetails,
         val message: String
     )
 
-    data class IssueDetails(
-        val book_id: String,
-        val createdAt: String,
-        val id: Int,
-        val status: String,
-        val studentEnrollmentId: Int,
-        val student_id: Int,
-        val return_date: Any
-    )
+
 
     data class ProfileModel(
         val borrow: Borrow,
@@ -61,7 +53,7 @@ object Student {
 
     data class Borrow(
         val fine: Double,
-        val history: List<IssueDetails>
+        val history: List<Book.IssueDetails>
     )
 
 

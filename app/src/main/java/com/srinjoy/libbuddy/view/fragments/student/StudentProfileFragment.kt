@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.databinding.FragmentStudentProfileBinding
+import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import com.srinjoy.libbuddy.view.adapters.IssueHistoryAdapter
 import com.srinjoy.libbuddy.viewmodels.StudentProfileViewModel
@@ -99,7 +100,7 @@ class StudentProfileFragment : Fragment() {
     private fun setInfoIntoUI(
         student: Student.Student,
         fine: Double,
-        history: List<Student.IssueDetails>
+        history: List<Book.IssueDetails>
     ) {
         mBinding.tvStudentName.text = student.name
         mBinding.tvStudentId.text = student.id ?: student.enrollment_id
