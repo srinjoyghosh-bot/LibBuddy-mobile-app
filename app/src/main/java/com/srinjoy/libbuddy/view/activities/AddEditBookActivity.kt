@@ -1,6 +1,8 @@
 package com.srinjoy.libbuddy.view.activities
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -80,7 +82,7 @@ class AddEditBookActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_save_book -> {
                 if (isEdit) {
-                    Toast.makeText(this, "Edit book", Toast.LENGTH_SHORT).show()
+                    editBook()
                 } else {
                     checkData()
                 }
@@ -107,12 +109,18 @@ class AddEditBookActivity : AppCompatActivity() {
                     if (!isEdit)
                         Toast.makeText(this, getString(R.string.msg_book_added), Toast.LENGTH_SHORT)
                             .show()
-                    else
+                    else {
                         Toast.makeText(
                             this,
                             getString(R.string.msg_book_updated),
                             Toast.LENGTH_SHORT
                         ).show()
+                        val intent = Intent()
+                        intent.putExtra(Constants.EXTRA_BOOK_DETAILS, mViewModel.book.value)
+                        setResult(Activity.RESULT_OK, intent)
+                        finish()
+                    }
+
                 }
             }
         }
@@ -136,6 +144,36 @@ class AddEditBookActivity : AppCompatActivity() {
         mBinding.etAuthor.setText(mBook!!.author)
         mBinding.etPublisher.setText(mBook!!.publisher)
         mBinding.etDescription.setText(mBook!!.description)
+    }
+
+    private fun editBook() {
+        val title = mBinding.etBookName.text.toString().trim { it <= ' ' }
+        val author = mBinding.etAuthor.text.toString().trim { it <= ' ' }
+        val publisher = mBinding.etPublisher.text.toString().trim { it <= ' ' }
+        val description = mBinding.etDescription.text.toString().trim { it <= ' ' }
+
+
+
+        when {
+            TextUtils.isEmpty(title) -> mBinding.tilBookName.error =
+                getString(R.string.err_book_form, "book name")
+            TextUtils.isEmpty(author) -> mBinding.tilAuthor.error =
+                getString(R.string.err_book_form, "author name")
+            TextUtils.isEmpty(publisher) -> mBinding.tilPublisher.error =
+                getString(R.string.err_book_form, "publisher name")
+            TextUtils.isEmpty(description) -> mBinding.tilBookDescription.error =
+                getString(R.string.err_book_form, "description")
+            else -> {
+                val book = mBook!!.copy(
+                    name = title,
+                    author = author,
+                    publisher = publisher,
+                    description = description
+                )
+                mViewModel.editBook(book, this)
+            }
+
+        }
     }
 
     private fun checkData() {

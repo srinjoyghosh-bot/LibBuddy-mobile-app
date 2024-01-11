@@ -7,7 +7,6 @@ import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
 import retrofit2.converter.gson.GsonConverterFactory
@@ -59,11 +58,15 @@ class LibraryApiService {
         return api.getBook(id)
     }
 
-    fun addBook(data: Book.Book, token: String): Single<Book.AddResponseModel> {
+    fun addBook(data: Book.Book, token: String): Single<Book.ResponseModel> {
         return api.addBook(data, token)
     }
 
-    fun deleteBook(id: String,token: String): Single<Book.DeleteResponseModel> {
-        return api.deleteBook(id,token)
+    fun deleteBook(id: String, token: String): Single<Book.DeleteResponseModel> {
+        return api.deleteBook(id, token)
+    }
+
+    fun editBook(book: Book.Book, token: String): Single<Book.ResponseModel> {
+        return api.editBook(data = book, token = token)
     }
 }

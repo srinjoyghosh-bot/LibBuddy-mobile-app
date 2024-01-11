@@ -2,18 +2,18 @@ package com.srinjoy.libbuddy.viewmodels
 
 import android.app.Activity
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.data.repository.AdminRepository
-import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.models.Book
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.SubmissionPublisher
 
 class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewModel() {
+    val book=MutableLiveData<Book.Book>()
     fun addBook(
         title: String,
         author: String,
@@ -29,12 +29,39 @@ class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewMo
             publisher = publisher,
             description = description
         )
-        Log.i("Admin token",token)
+        Log.i("Admin token", token)
         addDisposable(
             repository.addBook(book, "Bearer $token").subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.AddResponseModel>() {
-                    override fun onSuccess(t: Book.AddResponseModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.ResponseModel>() {
+                    override fun onSuccess(t: Book.ResponseModel) {
+                        setSuccess()
+                        stopLoading()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        setError(e.message)
+                        stopLoading()
+                    }
+
+                })
+        )
+    }
+
+    fun editBook(
+        editedBook: Book.Book,
+        activity: Activity
+    ) {
+        startLoading()
+        val token = (activity.application as LibraryApplication).prefs.token
+
+        Log.i("Admin token", token.toString())
+        addDisposable(
+            repository.editBook(editedBook, "Bearer $token").subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<Book.ResponseModel>() {
+                    override fun onSuccess(t: Book.ResponseModel) {
+                        book.value=editedBook
                         setSuccess()
                         stopLoading()
                     }

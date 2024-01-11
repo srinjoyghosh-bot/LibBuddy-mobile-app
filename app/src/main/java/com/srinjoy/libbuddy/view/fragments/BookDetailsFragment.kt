@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -18,14 +17,12 @@ import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.core.Constants
 import com.srinjoy.libbuddy.databinding.FragmentBookDetailsBinding
-import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.view.activities.AddEditBookActivity
 import com.srinjoy.libbuddy.view.activities.AdminMainActivity
 import com.srinjoy.libbuddy.view.activities.StudentMainActivity
 import com.srinjoy.libbuddy.viewmodels.BookDetailsViewModel
 import com.srinjoy.libbuddy.viewmodels.BookDetailsViewModelFactory
-import kotlin.reflect.typeOf
 
 class BookDetailsFragment : Fragment() {
 
@@ -196,6 +193,7 @@ class BookDetailsFragment : Fragment() {
         mProgressDialog?.dismiss()
     }
 
+    // TODO : use non deprecated method
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if ((requireActivity().application as LibraryApplication).prefs.isAdminLoggedIn) {
             Log.i("Inflate ho rha", "true")
@@ -225,12 +223,33 @@ class BookDetailsFragment : Fragment() {
             R.id.action_edit_book -> {
                 val intent = Intent(requireActivity(), AddEditBookActivity::class.java)
                 intent.putExtra(Constants.EXTRA_BOOK_DETAILS, mBook)
-                startActivity(intent)
+                // TODO: use non deprecated method
+                startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_BOOK)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == Constants.REQUEST_CODE_EDIT_BOOK) {
+            if (resultCode == Activity.RESULT_OK) {
+                data?.let {
+                    val book = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        it.getParcelableExtra(Constants.EXTRA_BOOK_DETAILS, Book.Book::class.java)
+                    } else {
+                        it.getParcelableExtra<Book.Book>(Constants.EXTRA_BOOK_DETAILS)
+                    }
+                    book?.let { result ->
+                        mBook = result
+                        setBookInfoIntoUI()
+
+                    }
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)

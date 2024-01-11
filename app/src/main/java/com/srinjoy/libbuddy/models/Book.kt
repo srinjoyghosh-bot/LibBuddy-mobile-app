@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 object Book {
-    data class AddResponseModel(
+    data class ResponseModel(
         val book: Book,
         val message: String
     )

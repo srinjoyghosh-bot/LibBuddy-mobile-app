@@ -9,6 +9,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface LibraryAPI {
@@ -46,11 +47,17 @@ interface LibraryAPI {
     fun addBook(
         @Body data: Book.Book,
         @Header(Constants.TOKEN_HEADER) token: String
-    ): Single<Book.AddResponseModel>
+    ): Single<Book.ResponseModel>
 
     @DELETE(Constants.BOOK_ENDPOINT + Constants.DELETE_ENDPOINT)
     fun deleteBook(
         @Query("id") id: String,
         @Header(Constants.TOKEN_HEADER) token: String
     ): Single<Book.DeleteResponseModel>
+
+    @PUT(Constants.BOOK_ENDPOINT + Constants.EDIT_ENDPOINT)
+    fun editBook(
+        @Body data: Book.Book,
+        @Header(Constants.TOKEN_HEADER) token: String
+    ): Single<Book.ResponseModel>
 }
