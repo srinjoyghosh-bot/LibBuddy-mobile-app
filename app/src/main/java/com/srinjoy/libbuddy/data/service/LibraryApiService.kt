@@ -50,7 +50,7 @@ class LibraryApiService {
         return api.getSelfProfile(token)
     }
 
-    fun getBooks(): Single<Book.AllBooksModel> {
+    fun getBooks(): Single<Book.BooksModel> {
         return api.getBooks()
     }
 
@@ -80,5 +80,13 @@ class LibraryApiService {
 
     fun rejectBookIssue(id: String,token: String) : Single<Book.DeleteIssueResponseModel>{
         return api.rejectBookIssue(id, token)
+    }
+
+    fun searchStudents(query:String,token: String) : Single<Student.StudentsModel>{
+        return api.searchStudents(query, token)
+    }
+
+    fun searchBooks(query: String) : Single<Book.BooksModel>{
+        return api.searchBooks(query)
     }
 }

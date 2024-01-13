@@ -21,6 +21,10 @@ object Student {
         val year: String
     )
 
+    data class StudentsModel(
+        val students:List<Student>
+    )
+
     data class LoginResponseModel(
         val message: String,
         val token: String,

@@ -3,6 +3,7 @@ package com.srinjoy.libbuddy.data.repository
 import com.srinjoy.libbuddy.data.service.LibraryApiService
 import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
+import com.srinjoy.libbuddy.models.Student
 import io.reactivex.rxjava3.core.Single
 
 class AdminRepository(private val apiService: LibraryApiService) {
@@ -36,5 +37,9 @@ class AdminRepository(private val apiService: LibraryApiService) {
 
     fun rejectBorrowRequest(id: String,token: String):Single<Book.DeleteIssueResponseModel>{
         return apiService.rejectBookIssue(id, token)
+    }
+
+    fun searchStudents(query:String,token: String) : Single<Student.StudentsModel>{
+        return apiService.searchStudents(query, token)
     }
 }

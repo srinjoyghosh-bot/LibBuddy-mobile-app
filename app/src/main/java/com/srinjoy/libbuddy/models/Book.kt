@@ -9,7 +9,7 @@ object Book {
         val message: String
     )
 
-    data class AllBooksModel(
+    data class BooksModel(
         val books: List<Book>
     )
 

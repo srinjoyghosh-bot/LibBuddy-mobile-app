@@ -10,6 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface LibraryAPI {
@@ -40,8 +41,11 @@ interface LibraryAPI {
     @GET(Constants.STUDENT_ENDPOINT + Constants.PROFILE_ENDPOINT)
     fun getSelfProfile(@Header(Constants.TOKEN_HEADER) token: String): Single<Student.ProfileModel>
 
+    @GET(Constants.STUDENT_ENDPOINT+Constants.SEARCH_ENDPOINT+"/{query}")
+    fun searchStudents(@Path("query") query:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Student.StudentsModel>
+
     @GET(Constants.BOOK_ENDPOINT)
-    fun getBooks(): Single<Book.AllBooksModel>
+    fun getBooks(): Single<Book.BooksModel>
 
     @GET(Constants.BOOK_ENDPOINT + Constants.FIND_ENDPOINT)
     fun getBook(@Query("id") id: String): Single<Book.Book>
@@ -69,4 +73,7 @@ interface LibraryAPI {
 
     @PUT(Constants.BOOK_ENDPOINT+Constants.REJECT_ISSUE_ENDPOINT)
     fun rejectBookIssue(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.DeleteIssueResponseModel>
+
+    @GET(Constants.BOOK_ENDPOINT+Constants.SEARCH_ENDPOINT+"/{query}")
+    fun searchBooks(@Path("query") query:String) : Single<Book.BooksModel>
 }

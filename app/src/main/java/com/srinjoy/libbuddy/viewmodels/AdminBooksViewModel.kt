@@ -19,8 +19,8 @@ class AdminBooksViewModel(private val repository: BookRepository) : BaseViewMode
             repository.getAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.AllBooksModel>() {
-                    override fun onSuccess(result: Book.AllBooksModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.BooksModel>() {
+                    override fun onSuccess(result: Book.BooksModel) {
                         if (showLoader)
                             stopLoading()
                         books.value = result.books
@@ -37,6 +37,22 @@ class AdminBooksViewModel(private val repository: BookRepository) : BaseViewMode
                 })
         )
 
+    }
+
+    fun search(query:String){
+        startLoading()
+        addDisposable(repository.search(query).observeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :DisposableSingleObserver<Book.BooksModel>(){
+            override fun onSuccess(t: Book.BooksModel) {
+                books.value=t.books
+                stopLoading()
+                setSuccess()
+            }
+
+            override fun onError(e: Throwable) {
+                stopLoading()
+                setError(e.message)
+            }
+        }))
     }
 }
 

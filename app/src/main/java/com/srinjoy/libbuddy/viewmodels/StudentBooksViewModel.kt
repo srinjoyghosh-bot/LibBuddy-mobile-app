@@ -1,12 +1,10 @@
 package com.srinjoy.libbuddy.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.models.Book
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -21,8 +19,8 @@ class StudentBooksViewModel(private val repository: BookRepository) : BaseViewMo
             repository.getAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.AllBooksModel>() {
-                    override fun onSuccess(result: Book.AllBooksModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.BooksModel>() {
+                    override fun onSuccess(result: Book.BooksModel) {
                         if (showLoader)
                             stopLoading()
                         books.value = result.books
@@ -39,6 +37,22 @@ class StudentBooksViewModel(private val repository: BookRepository) : BaseViewMo
                 })
         )
 
+    }
+
+    fun searchBooks(query:String){
+        startLoading()
+        addDisposable(repository.search(query).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(object : DisposableSingleObserver<Book.BooksModel>(){
+            override fun onSuccess(t: Book.BooksModel) {
+                books.value=t.books
+                stopLoading()
+                setSuccess()
+            }
+
+            override fun onError(e: Throwable) {
+                stopLoading()
+                setError(e.message)
+            }
+        }))
     }
 
 

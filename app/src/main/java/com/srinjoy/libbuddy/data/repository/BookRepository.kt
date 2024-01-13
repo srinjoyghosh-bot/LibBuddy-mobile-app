@@ -5,11 +5,15 @@ import com.srinjoy.libbuddy.models.Book
 import io.reactivex.rxjava3.core.Single
 
 class BookRepository(private val apiService: LibraryApiService) {
-    fun getAll(): Single<Book.AllBooksModel> {
+    fun getAll(): Single<Book.BooksModel> {
         return apiService.getBooks()
     }
 
-    fun getBookById(id:String):Single<Book.Book>{
+    fun getBookById(id: String): Single<Book.Book> {
         return apiService.getBook(id)
+    }
+
+    fun search(query: String): Single<Book.BooksModel> {
+        return apiService.searchBooks(query)
     }
 }
