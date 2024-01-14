@@ -63,6 +63,8 @@ class AdminBooksFragment : Fragment() {
             mViewModel.getAllBooks(showLoader = false)
         }
 
+        Log.i("ADMIN TOKEN",(requireActivity().application as LibraryApplication).prefs.token.toString())
+
         mBinding!!.floatingActionButton.setOnClickListener{
             val intent=Intent(requireActivity(),AddEditBookActivity::class.java)
             requireActivity().startActivity(intent)
@@ -177,6 +179,7 @@ class AdminBooksFragment : Fragment() {
     }
 
     fun goToBookDetails(book: Book.Book) {
+        Log.i("ADMIN TOKEN",(requireActivity().application as LibraryApplication).prefs.token.toString())
         if (requireActivity() is AdminMainActivity) {
             (requireActivity() as AdminMainActivity?)!!.hideBottomNavigationView()
         }

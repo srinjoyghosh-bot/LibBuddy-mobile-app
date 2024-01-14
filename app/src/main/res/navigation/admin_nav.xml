@@ -17,7 +17,11 @@
         android:id="@+id/adminAllStudentsFragment"
         android:name="com.srinjoy.libbuddy.view.fragments.admin.AdminAllStudentsFragment"
         android:label="@string/title_students"
-        tools:layout="@layout/fragment_admin_all_students" />
+        tools:layout="@layout/fragment_admin_all_students" >
+        <action
+            android:id="@+id/action_adminAllStudentsFragment_to_studentProfileFragment"
+            app:destination="@id/studentProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adminRequestsFragment"
         android:name="com.srinjoy.libbuddy.view.fragments.admin.AdminRequestsFragment"
@@ -32,4 +36,8 @@
         android:id="@+id/bookDetailsFragment2"
         android:name="com.srinjoy.libbuddy.view.fragments.BookDetailsFragment"
         android:label="@string/title_book_details" />
+    <fragment
+        android:id="@+id/studentProfileFragment"
+        android:name="com.srinjoy.libbuddy.view.fragments.student.StudentProfileFragment"
+        android:label="@string/title_profile" />
 </navigation>

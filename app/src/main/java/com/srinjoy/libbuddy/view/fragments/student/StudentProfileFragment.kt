@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
+import com.srinjoy.libbuddy.core.Constants
 import com.srinjoy.libbuddy.databinding.FragmentStudentProfileBinding
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
@@ -26,12 +27,17 @@ class StudentProfileFragment : Fragment() {
 
 
     private val mViewModel: StudentProfileViewModel by viewModels {
-        StudentProfileViewModelFactory((requireActivity().application as LibraryApplication).studentRepository)
+        StudentProfileViewModelFactory(
+            (requireActivity().application as LibraryApplication).studentRepository,
+            (requireActivity().application as LibraryApplication).adminRepository
+        )
     }
 
     private lateinit var mBinding: FragmentStudentProfileBinding
     private lateinit var mIssueHistoryAdapter: IssueHistoryAdapter
     private var mProgressDialog: Dialog? = null
+    private var mStudentID: String? = null
+    private var isSelfProfile: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,22 +60,26 @@ class StudentProfileFragment : Fragment() {
         viewModelObservers()
 
         mBinding.srlStudentProfile.setOnRefreshListener {
-            mViewModel.getProfile(this@StudentProfileFragment, false)
+            if (isSelfProfile)
+                mViewModel.getProfile(this@StudentProfileFragment, false)
+            else
+                mViewModel.getProfile(this@StudentProfileFragment, false, mStudentID)
         }
 
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_student_profile,menu)
+        if (isSelfProfile)
+            inflater.inflate(R.menu.menu_student_profile, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.action_logout->{
+        return when (item.itemId) {
+            R.id.action_logout -> {
                 logout()
-                val intent=Intent(requireActivity(),AuthActivity::class.java)
+                val intent = Intent(requireActivity(), AuthActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 true
@@ -78,10 +88,10 @@ class StudentProfileFragment : Fragment() {
         }
     }
 
-    private fun logout(){
-        val application=(requireActivity().application as LibraryApplication)
-        application.prefs.token=null
-        application.prefs.isStudentLoggedIn=false
+    private fun logout() {
+        val application = (requireActivity().application as LibraryApplication)
+        application.prefs.token = null
+        application.prefs.isStudentLoggedIn = false
     }
 
     private fun viewModelObservers() {
@@ -159,8 +169,15 @@ class StudentProfileFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.i("On attach", "called")
-        if (mViewModel.student.value == null)
-            mViewModel.getProfile(this@StudentProfileFragment)
+        if (mViewModel.student.value == null) {
+            mStudentID = arguments?.getString(Constants.EXTRA_STUDENT_ID)
+            if (mStudentID != null) {
+                isSelfProfile = false
+                mViewModel.getProfile(this@StudentProfileFragment, id = mStudentID)
+            } else
+                mViewModel.getProfile(this@StudentProfileFragment)
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -41,6 +41,9 @@ interface LibraryAPI {
     @GET(Constants.STUDENT_ENDPOINT + Constants.PROFILE_ENDPOINT)
     fun getSelfProfile(@Header(Constants.TOKEN_HEADER) token: String): Single<Student.ProfileModel>
 
+    @GET(Constants.STUDENT_ENDPOINT + Constants.PROFILE_ENDPOINT+"/{id}")
+    fun getStudentProfile(@Path("id") id: String, @Header(Constants.TOKEN_HEADER) token: String): Single<Student.ProfileModel>
+
     @GET(Constants.STUDENT_ENDPOINT+Constants.SEARCH_ENDPOINT+"/{query}")
     fun searchStudents(@Path("query") query:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Student.StudentsModel>
 

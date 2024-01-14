@@ -50,6 +50,10 @@ class LibraryApiService {
         return api.getSelfProfile(token)
     }
 
+    fun getStudentProfile(id:String,token: String): Single<Student.ProfileModel> {
+        return api.getStudentProfile(id=id,token=token)
+    }
+
     fun getBooks(): Single<Book.BooksModel> {
         return api.getBooks()
     }

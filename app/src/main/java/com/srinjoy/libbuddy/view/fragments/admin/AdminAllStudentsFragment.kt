@@ -10,13 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
+import com.srinjoy.libbuddy.core.Constants
 import com.srinjoy.libbuddy.databinding.FragmentAdminAllStudentsBinding
 import com.srinjoy.libbuddy.models.Student
+import com.srinjoy.libbuddy.view.activities.AdminMainActivity
 import com.srinjoy.libbuddy.view.adapters.StudentsAdapter
 import com.srinjoy.libbuddy.viewmodels.AdminAllStudentsViewModel
 import com.srinjoy.libbuddy.viewmodels.AdminAllStudentsViewModelFactory
@@ -106,6 +110,21 @@ class AdminAllStudentsFragment : Fragment() {
         mCircularProgressBar.visibility=View.GONE
         mBinding.rvStudents.visibility=View.VISIBLE
         mBinding.tvNoStudents.visibility=View.GONE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (requireActivity() is AdminMainActivity) {
+            (requireActivity() as AdminMainActivity?)!!.showBottomNavigationView()
+        }
+    }
+
+    fun goToStudentProfile(id:String){
+        if (requireActivity() is AdminMainActivity) {
+            (requireActivity() as AdminMainActivity?)!!.hideBottomNavigationView()
+        }
+        val bundle = bundleOf(Constants.EXTRA_STUDENT_ID to id)
+        findNavController().navigate(R.id.action_adminAllStudentsFragment_to_studentProfileFragment, bundle)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.srinjoy.libbuddy.data.repository
 
+import android.provider.ContactsContract.Profile
 import com.srinjoy.libbuddy.data.service.LibraryApiService
 import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
@@ -41,5 +42,9 @@ class AdminRepository(private val apiService: LibraryApiService) {
 
     fun searchStudents(query:String,token: String) : Single<Student.StudentsModel>{
         return apiService.searchStudents(query, token)
+    }
+
+    fun getStudentProfile(id: String,token: String) : Single<Student.ProfileModel>{
+        return apiService.getStudentProfile(id, token)
     }
 }
