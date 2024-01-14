@@ -31,7 +31,14 @@
         android:id="@+id/adminSettingsFragment"
         android:name="com.srinjoy.libbuddy.view.fragments.admin.AdminSettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_admin_settings" />
+        tools:layout="@layout/fragment_admin_settings" >
+        <action
+            android:id="@+id/action_adminSettingsFragment_to_addAdminFragment"
+            app:destination="@id/addAdminFragment" />
+        <action
+            android:id="@+id/action_adminSettingsFragment_to_adminBookReturnFragment"
+            app:destination="@id/adminBookReturnFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookDetailsFragment2"
         android:name="com.srinjoy.libbuddy.view.fragments.BookDetailsFragment"
@@ -40,4 +47,13 @@
         android:id="@+id/studentProfileFragment"
         android:name="com.srinjoy.libbuddy.view.fragments.student.StudentProfileFragment"
         android:label="@string/title_profile" />
+    <fragment
+        android:id="@+id/addAdminFragment"
+        android:name="com.srinjoy.libbuddy.view.fragments.admin.AddAdminFragment"
+        android:label="@string/title_add_admin"
+        tools:layout="@layout/fragment_add_admin" />
+    <fragment
+        android:id="@+id/adminBookReturnFragment"
+        android:name="com.srinjoy.libbuddy.view.fragments.admin.AdminBookReturnFragment"
+        android:label="@string/title_book_return" />
 </navigation>

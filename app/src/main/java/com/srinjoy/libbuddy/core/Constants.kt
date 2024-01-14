@@ -16,6 +16,7 @@ object Constants {
     const val ISSUE_ENDPOINT: String = "/issue"
     const val REJECT_ISSUE_ENDPOINT: String = "/reject-issue"
     const val SEARCH_ENDPOINT: String = "/search"
+    const val RETURN_ENDPOINT:String="/return"
     const val APP_PREFS: String = "app_preferences"
     const val STUDENT_LOGIN_KEY: String = "student_login_key"
     const val ADMIN_LOGIN_KEY: String = "admin_login_key"

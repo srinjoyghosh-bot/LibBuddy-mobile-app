@@ -63,7 +63,7 @@ interface LibraryAPI {
     fun deleteBook(
         @Query("id") id: String,
         @Header(Constants.TOKEN_HEADER) token: String
-    ): Single<Book.DeleteIssueResponseModel>
+    ): Single<Book.SingleMessageResponseModel>
 
     @PUT(Constants.BOOK_ENDPOINT + Constants.EDIT_ENDPOINT)
     fun editBook(
@@ -72,11 +72,14 @@ interface LibraryAPI {
     ): Single<Book.ResponseModel>
 
     @PUT(Constants.BOOK_ENDPOINT+Constants.ISSUE_ENDPOINT)
-    fun issueBook(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.DeleteIssueResponseModel>
+    fun issueBook(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.SingleMessageResponseModel>
 
     @PUT(Constants.BOOK_ENDPOINT+Constants.REJECT_ISSUE_ENDPOINT)
-    fun rejectBookIssue(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.DeleteIssueResponseModel>
+    fun rejectBookIssue(@Query("id") id:String,@Header(Constants.TOKEN_HEADER) token: String) : Single<Book.SingleMessageResponseModel>
 
     @GET(Constants.BOOK_ENDPOINT+Constants.SEARCH_ENDPOINT+"/{query}")
     fun searchBooks(@Path("query") query:String) : Single<Book.BooksModel>
+
+    @PUT(Constants.BOOK_ENDPOINT+Constants.RETURN_ENDPOINT)
+    fun returnBook(@Body data:Book.BorrowBodyDataModel,@Header(Constants.TOKEN_HEADER) token: String):Single<Book.SingleMessageResponseModel>
 }

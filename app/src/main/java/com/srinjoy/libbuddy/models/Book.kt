@@ -13,8 +13,13 @@ object Book {
         val books: List<Book>
     )
 
-    data class DeleteIssueResponseModel(
+    data class SingleMessageResponseModel(
         val message: String
+    )
+
+    data class BorrowBodyDataModel(
+        val book_id: String,
+        val student_id: String
     )
 
     @Parcelize

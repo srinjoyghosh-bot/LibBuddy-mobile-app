@@ -80,8 +80,8 @@ class BookDetailsViewModel(
         addDisposable(
             adminRepository!!.deleteBook(id, "Bearer $token").subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.DeleteIssueResponseModel>() {
-                    override fun onSuccess(t: Book.DeleteIssueResponseModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.SingleMessageResponseModel>() {
+                    override fun onSuccess(t: Book.SingleMessageResponseModel) {
                         stopLoading()
                         deleteSuccess.value=true
                     }

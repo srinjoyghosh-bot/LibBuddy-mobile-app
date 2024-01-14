@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.data.repository.AdminRepository
-import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -49,8 +48,8 @@ class AdminRequestsViewModel(private val repository: AdminRepository) : BaseView
         addDisposable(
             repository.approveBorrowRequest(id, "Bearer $token").subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.DeleteIssueResponseModel>() {
-                    override fun onSuccess(t: Book.DeleteIssueResponseModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.SingleMessageResponseModel>() {
+                    override fun onSuccess(t: Book.SingleMessageResponseModel) {
                         borrowPosition.value = position
                         approveSuccess.value = true
                         stopLoading()
@@ -71,8 +70,8 @@ class AdminRequestsViewModel(private val repository: AdminRepository) : BaseView
         addDisposable(
             repository.rejectBorrowRequest(id, "Bearer $token").subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Book.DeleteIssueResponseModel>() {
-                    override fun onSuccess(t: Book.DeleteIssueResponseModel) {
+                .subscribeWith(object : DisposableSingleObserver<Book.SingleMessageResponseModel>() {
+                    override fun onSuccess(t: Book.SingleMessageResponseModel) {
                         borrowPosition.value = position
                         rejectSuccess.value = true
                         stopLoading()

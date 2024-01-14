@@ -1,6 +1,5 @@
 package com.srinjoy.libbuddy.data.repository
 
-import android.provider.ContactsContract.Profile
 import com.srinjoy.libbuddy.data.service.LibraryApiService
 import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
@@ -20,7 +19,7 @@ class AdminRepository(private val apiService: LibraryApiService) {
         return apiService.addBook(book, token)
     }
 
-    fun deleteBook(id: String, token: String): Single<Book.DeleteIssueResponseModel> {
+    fun deleteBook(id: String, token: String): Single<Book.SingleMessageResponseModel> {
         return apiService.deleteBook(id, token)
     }
 
@@ -32,11 +31,11 @@ class AdminRepository(private val apiService: LibraryApiService) {
         return apiService.getRequests(token)
     }
 
-    fun approveBorrowRequest(id: String,token: String):Single<Book.DeleteIssueResponseModel>{
+    fun approveBorrowRequest(id: String,token: String):Single<Book.SingleMessageResponseModel>{
         return apiService.issueBook(id, token)
     }
 
-    fun rejectBorrowRequest(id: String,token: String):Single<Book.DeleteIssueResponseModel>{
+    fun rejectBorrowRequest(id: String,token: String):Single<Book.SingleMessageResponseModel>{
         return apiService.rejectBookIssue(id, token)
     }
 
@@ -46,5 +45,9 @@ class AdminRepository(private val apiService: LibraryApiService) {
 
     fun getStudentProfile(id: String,token: String) : Single<Student.ProfileModel>{
         return apiService.getStudentProfile(id, token)
+    }
+
+    fun returnBook(dataModel: Book.BorrowBodyDataModel,token: String) : Single<Book.SingleMessageResponseModel> {
+        return apiService.returnBook(dataModel,token)
     }
 }

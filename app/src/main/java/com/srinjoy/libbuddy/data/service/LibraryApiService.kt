@@ -23,7 +23,7 @@ class LibraryApiService {
         bodyDataModel: Admin.BodyDataModel,
         token: String
     ): Single<Admin.AddResponseModel> {
-        return api.addAdmin(bodyDataModel = bodyDataModel, token = "Bearer $token")
+        return api.addAdmin(bodyDataModel = bodyDataModel, token = token)
     }
 
     fun loginAdmin(bodyDataModel: Admin.BodyDataModel): Single<Admin.LoginResponseModel> {
@@ -66,7 +66,7 @@ class LibraryApiService {
         return api.addBook(data, token)
     }
 
-    fun deleteBook(id: String, token: String): Single<Book.DeleteIssueResponseModel> {
+    fun deleteBook(id: String, token: String): Single<Book.SingleMessageResponseModel> {
         return api.deleteBook(id, token)
     }
 
@@ -78,11 +78,11 @@ class LibraryApiService {
         return api.getRequests(token)
     }
 
-    fun issueBook(id: String,token: String) : Single<Book.DeleteIssueResponseModel>{
+    fun issueBook(id: String,token: String) : Single<Book.SingleMessageResponseModel>{
         return api.issueBook(id, token)
     }
 
-    fun rejectBookIssue(id: String,token: String) : Single<Book.DeleteIssueResponseModel>{
+    fun rejectBookIssue(id: String,token: String) : Single<Book.SingleMessageResponseModel>{
         return api.rejectBookIssue(id, token)
     }
 
@@ -92,5 +92,9 @@ class LibraryApiService {
 
     fun searchBooks(query: String) : Single<Book.BooksModel>{
         return api.searchBooks(query)
+    }
+
+    fun returnBook(data:Book.BorrowBodyDataModel,token: String) : Single<Book.SingleMessageResponseModel>{
+        return api.returnBook(data, token)
     }
 }

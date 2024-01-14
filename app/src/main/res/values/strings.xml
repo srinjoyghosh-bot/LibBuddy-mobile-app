@@ -41,4 +41,18 @@
     <string name="title_search">Search</string>
     <string name="hint_search_book">Search book name or id</string>
     <string name="title_logout">Log Out</string>
+    <string name="title_add_admin">Add Admin</string>
+    <string name="title_book_return">Book Return</string>
+    <string name="title_add">Add</string>
+    <string name="title_submit">Submit</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="msg_provide_email">Give proper email</string>
+    <string name="msg_provide_password">Give proper password</string>
+    <string name="msg_admin_added">Admin added successfully!</string>
+    <string name="title_book_id">Book ID</string>
+    <string name="hint_student_id">Student ID</string>
+    <string name="msg_provide_book_id">Give proper book id</string>
+    <string name="msg_provide_student_id">Give proper student id</string>
+    <string name="msg_book_returned">Book return successful</string>
 </resources>
