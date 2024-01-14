@@ -1,12 +1,13 @@
 package com.srinjoy.libbuddy.view.fragments.admin
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.srinjoy.libbuddy.R
+import com.srinjoy.libbuddy.application.LibraryApplication
+import com.srinjoy.libbuddy.view.activities.AuthActivity
 import com.srinjoy.libbuddy.viewmodels.AdminSettingsViewModel
 
 class AdminSettingsFragment : Fragment() {
@@ -24,10 +25,17 @@ class AdminSettingsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_admin_settings, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AdminSettingsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+
+
+    private fun logout(){
+        val application=(requireActivity().application as LibraryApplication)
+        application.prefs.token=null
+        application.prefs.isAdminLoggedIn=false
     }
 
 }

@@ -2,13 +2,12 @@ package com.srinjoy.libbuddy.view.fragments.student
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +17,7 @@ import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.databinding.FragmentStudentProfileBinding
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
+import com.srinjoy.libbuddy.view.activities.AuthActivity
 import com.srinjoy.libbuddy.view.adapters.IssueHistoryAdapter
 import com.srinjoy.libbuddy.viewmodels.StudentProfileViewModel
 import com.srinjoy.libbuddy.viewmodels.StudentProfileViewModelFactory
@@ -57,7 +57,31 @@ class StudentProfileFragment : Fragment() {
             mViewModel.getProfile(this@StudentProfileFragment, false)
         }
 
-        Log.i("On view created", "called")
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_student_profile,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_logout->{
+                logout()
+                val intent=Intent(requireActivity(),AuthActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun logout(){
+        val application=(requireActivity().application as LibraryApplication)
+        application.prefs.token=null
+        application.prefs.isStudentLoggedIn=false
     }
 
     private fun viewModelObservers() {
