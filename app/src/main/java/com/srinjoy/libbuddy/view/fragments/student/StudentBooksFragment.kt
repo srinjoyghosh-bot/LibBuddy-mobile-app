@@ -5,11 +5,11 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,6 +29,7 @@ class StudentBooksFragment : Fragment() {
     private lateinit var mBinding: FragmentStudentBooksBinding
     private lateinit var mBooksAdapter: AllBooksAdapter
     private var mProgressDialog: Dialog? = null
+    private lateinit var mCircularProgressBar: ProgressBar
 
     private val mViewModel: StudentBooksViewModel by viewModels {
         StudentBooksViewModelFactory((requireActivity().application as LibraryApplication).bookRepository)
@@ -45,6 +46,8 @@ class StudentBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mCircularProgressBar = mBinding.pbCircularBooks
+
         mBinding.rvAllBooks.layoutManager = GridLayoutManager(requireActivity(), 2)
 
         mBooksAdapter = AllBooksAdapter(this@StudentBooksFragment)
@@ -56,17 +59,17 @@ class StudentBooksFragment : Fragment() {
             mViewModel.getAllBooks(showLoader = false)
         }
 
-        Log.i("On view c","called")
+//        Log.i("On view c", "called")
 
-        setUpLoader()
+//        setUpLoader()
 
 //        mViewModel.getAllBooks()
 
         mViewModel.loading.observe(viewLifecycleOwner) { value ->
             value?.let {
-                if(value){
+                if (value) {
                     showLoader()
-                }else{
+                } else {
                     stopLoader()
                 }
             }
@@ -104,10 +107,34 @@ class StudentBooksFragment : Fragment() {
             }
         }
 
-
+        setHasOptionsMenu(true)
     }
 
-    private fun setUpLoader(){
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search_book, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search_books)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.queryHint = getString(R.string.hint_search_book)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isNotEmpty())
+                        mViewModel.searchBooksDebounced(it)
+                    else
+                        mViewModel.getAllBooks()
+                }
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun setUpLoader() {
         mProgressDialog = Dialog(requireActivity())
         mProgressDialog!!.setContentView(R.layout.dialog_custom_progress)
         mProgressDialog!!.setCancelable(false)
@@ -115,17 +142,21 @@ class StudentBooksFragment : Fragment() {
     }
 
     private fun showLoader() {
-        mProgressDialog?.show()
+//        mProgressDialog?.show()
+        mCircularProgressBar.visibility = View.VISIBLE
+        mBinding.rvAllBooks.visibility = View.GONE
+        mBinding.tvNoBooks.visibility = View.GONE
     }
 
     private fun stopLoader() {
-        mProgressDialog?.dismiss()
+//        mProgressDialog?.dismiss()
+        mCircularProgressBar.visibility = View.GONE
+        mBinding.rvAllBooks.visibility = View.VISIBLE
+        mBinding.tvNoBooks.visibility = View.GONE
     }
 
-    @SuppressLint("LongLogTag")
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.i("On attach books fragment","called")
         mViewModel.getAllBooks()
     }
 

@@ -3,11 +3,15 @@ package com.srinjoy.libbuddy.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.models.Book
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AdminBooksViewModel(private val repository: BookRepository) : BaseViewModel() {
     val books = MutableLiveData<List<Book.Book>>();
@@ -39,9 +43,19 @@ class AdminBooksViewModel(private val repository: BookRepository) : BaseViewMode
 
     }
 
-    fun search(query:String){
+    private var searchJob: Job? = null
+
+    fun searchBooksDebounced(searchText: String) {
+        searchJob?.cancel()
         startLoading()
-        addDisposable(repository.search(query).observeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :DisposableSingleObserver<Book.BooksModel>(){
+        searchJob = viewModelScope.launch {
+            delay(500)
+            searchBooks(searchText)
+        }
+    }
+
+    private fun searchBooks(query:String){
+        addDisposable(repository.search(query).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(object : DisposableSingleObserver<Book.BooksModel>(){
             override fun onSuccess(t: Book.BooksModel) {
                 books.value=t.books
                 stopLoading()

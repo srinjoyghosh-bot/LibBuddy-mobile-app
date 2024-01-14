@@ -7,11 +7,11 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -37,6 +37,7 @@ class AdminBooksFragment : Fragment() {
     private var mBinding: FragmentAdminBooksBinding? = null
     private lateinit var mBooksAdapter: AllBooksAdapter
     private var mProgressDialog: Dialog? = null
+    private lateinit var mCircularProgressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +49,9 @@ class AdminBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mCircularProgressBar = mBinding!!.pbCircularBooks
+
         mBinding!!.rvAllBooks.layoutManager = GridLayoutManager(requireActivity(), 2)
 
         mBooksAdapter = AllBooksAdapter(this@AdminBooksFragment)
@@ -64,10 +68,36 @@ class AdminBooksFragment : Fragment() {
             requireActivity().startActivity(intent)
         }
 
-        setUpLoader()
+        setHasOptionsMenu(true)
+
+//        setUpLoader()
 
         viewModelObservers()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search_book, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search_books)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.queryHint = getString(R.string.hint_search_book)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isNotEmpty())
+                        mViewModel.searchBooksDebounced(it)
+                    else
+                        mViewModel.getAllBooks()
+                }
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun viewModelObservers(){
@@ -121,11 +151,17 @@ class AdminBooksFragment : Fragment() {
     }
 
     private fun showLoader() {
-        mProgressDialog?.show()
+//        mProgressDialog?.show()
+        mCircularProgressBar.visibility = View.VISIBLE
+        mBinding!!.rvAllBooks.visibility = View.GONE
+        mBinding!!.tvNoBooks.visibility = View.GONE
     }
 
     private fun stopLoader() {
-        mProgressDialog?.dismiss()
+//        mProgressDialog?.dismiss()
+        mCircularProgressBar.visibility = View.GONE
+        mBinding!!.rvAllBooks.visibility = View.VISIBLE
+        mBinding!!.tvNoBooks.visibility = View.GONE
     }
 
     override fun onAttach(context: Context) {

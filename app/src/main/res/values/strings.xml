@@ -38,4 +38,6 @@
     <string name="msg_request_approved">Borrow request approved!</string>
     <string name="msg_request_rejected">Borrow request rejected!</string>
     <string name="lbl_no_students">No students found :(</string>
+    <string name="title_search">Search</string>
+    <string name="hint_search_book">Search book name or id</string>
 </resources>
