@@ -55,4 +55,6 @@
     <string name="msg_provide_book_id">Give proper book id</string>
     <string name="msg_provide_student_id">Give proper student id</string>
     <string name="msg_book_returned">Book return successful</string>
+    <string name="lbl_issue_date">Issue : %s</string>
+    <string name="lbl_return_date">Return : %s</string>
 </resources>

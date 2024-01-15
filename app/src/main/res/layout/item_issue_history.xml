@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="6">
+            android:layout_weight="8">
 
             <TextView
                 android:id="@+id/tv_book_name"
@@ -32,14 +32,29 @@
                 android:layout_weight="1"
                 android:gravity="start|bottom"
                 android:textSize="@dimen/_15ssp"/>
-
-            <TextView
-                android:id="@+id/tv_issue_date"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Issue Date"
-                android:textSize="@dimen/_12ssp"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_issue_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Issue : dd/MM/yyyy"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/tv_return_date"
+                    android:visibility="gone"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Return : dd/MM/yyyy"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
         </LinearLayout>
 
         <ImageView
