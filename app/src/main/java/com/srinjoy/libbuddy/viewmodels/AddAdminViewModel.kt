@@ -27,7 +27,7 @@ class AddAdminViewModel(private val repository: AdminRepository) : BaseViewModel
 
                     override fun onError(e: Throwable) {
                         stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
                 })
         )

@@ -50,8 +50,7 @@ class IssueHistoryAdapter(private val fragment: Fragment) :
         if (issue.return_date != null) {
             holder.tvReturnDate.visibility = View.VISIBLE
             holder.tvReturnDate.text = fragment.getString(
-                R.string.lbl_return_date,
-                Utils.getFormattedDate(issue.return_date as String)
+                R.string.lbl_return_date, Utils.getFormattedDate(issue.return_date as String)
             )
         }
 
@@ -169,10 +168,7 @@ class SwipeCallback(
         when {
             dX > 0 -> { // Swiping to the right (Accept)
                 acceptBackground.setBounds(
-                    itemView.left,
-                    itemView.top,
-                    dX.toInt(),
-                    itemView.bottom
+                    itemView.left, itemView.top, dX.toInt(), itemView.bottom
                 )
                 acceptBackground.draw(c)
 
@@ -186,15 +182,11 @@ class SwipeCallback(
             }
             dX < 0 -> { // Swiping to the left (Reject)
                 rejectBackground.setBounds(
-                    itemView.right + dX.toInt(),
-                    itemView.top,
-                    itemView.right,
-                    itemView.bottom
+                    itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom
                 )
                 rejectBackground.draw(c)
 
-                val iconTop =
-                    itemView.top + (itemView.height - rejectIcon!!.intrinsicHeight) / 2
+                val iconTop = itemView.top + (itemView.height - rejectIcon!!.intrinsicHeight) / 2
                 val iconLeft = itemView.right - iconMargin - rejectIcon.intrinsicWidth
                 val iconRight = itemView.right - iconMargin
                 val iconBottom = iconTop + rejectIcon.intrinsicHeight

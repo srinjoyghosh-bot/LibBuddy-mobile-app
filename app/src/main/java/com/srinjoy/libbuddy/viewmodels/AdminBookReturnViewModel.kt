@@ -23,7 +23,7 @@ class AdminBookReturnViewModel(private val repository: AdminRepository) : BaseVi
 
             override fun onError(e: Throwable) {
                 stopLoading()
-                setError(e.message)
+                setError(e)
             }
         }))
     }

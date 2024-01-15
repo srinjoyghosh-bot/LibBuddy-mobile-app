@@ -44,7 +44,7 @@ class BookDetailsViewModel(
                     override fun onError(e: Throwable) {
                         if (showLoader)
                             stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
                 })
         )
@@ -67,7 +67,7 @@ class BookDetailsViewModel(
 
                     override fun onError(e: Throwable) {
                         stopLoading()
-                        setError(e.message.toString())
+                        setError(e)
                     }
 
                 })
@@ -88,7 +88,7 @@ class BookDetailsViewModel(
 
                     override fun onError(e: Throwable) {
                         stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
                 })
         )

@@ -1,10 +1,13 @@
 package com.srinjoy.libbuddy.viewmodels
 
 import android.app.Activity
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.srinjoy.libbuddy.application.LibraryApplication
+import com.srinjoy.libbuddy.core.Utils
 import com.srinjoy.libbuddy.data.repository.AdminRepository
 import com.srinjoy.libbuddy.data.service.LibraryApiService
 import com.srinjoy.libbuddy.models.Admin
@@ -13,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.HttpException
 
 class AdminViewModel : ViewModel() {
     private val apiService: LibraryApiService = LibraryApiService()
@@ -53,9 +57,9 @@ class AdminViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<Admin.LoginResponseModel>() {
 
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onError(e: Throwable) {
-
-                    errorMessage.value = e.message
+                    errorMessage.value = Utils.getErrorMessage(e)
                     error.value = true
                     loading.value = false
                     e.printStackTrace()

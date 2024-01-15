@@ -42,7 +42,7 @@ class StudentProfileViewModel(private val studentRepository: StudentRepository,p
                         override fun onError(e: Throwable) {
                             if (showLoader)
                                 stopLoading()
-                            setError(e.message.toString())
+                            setError(e)
 
                         }
 
@@ -65,7 +65,7 @@ class StudentProfileViewModel(private val studentRepository: StudentRepository,p
                         override fun onError(e: Throwable) {
                             if (showLoader)
                                 stopLoading()
-                            setError(e.message.toString())
+                            setError(e)
 
                         }
 

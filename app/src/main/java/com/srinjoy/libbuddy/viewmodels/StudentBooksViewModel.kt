@@ -36,7 +36,7 @@ class StudentBooksViewModel(private val repository: BookRepository) : BaseViewMo
                     }
 
                     override fun onError(e: Throwable) {
-                        setError(e.message)
+                        setError(e)
                         if (showLoader)
                             stopLoading()
                     }
@@ -66,7 +66,7 @@ class StudentBooksViewModel(private val repository: BookRepository) : BaseViewMo
 
             override fun onError(e: Throwable) {
                 stopLoading()
-                setError(e.message)
+                setError(e)
             }
         }))
     }

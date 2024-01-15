@@ -53,7 +53,7 @@ class AdminAllStudentsViewModel(private val repository: AdminRepository) : BaseV
                     override fun onError(e: Throwable) {
                         Log.e("In search debounced","error")
                         stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
                 })
         )

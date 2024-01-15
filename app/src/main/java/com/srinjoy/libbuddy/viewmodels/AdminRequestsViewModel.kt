@@ -36,7 +36,7 @@ class AdminRequestsViewModel(private val repository: AdminRepository) : BaseView
                     override fun onError(e: Throwable) {
                         if (showLoader)
                             stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
                 })
         )
@@ -57,7 +57,7 @@ class AdminRequestsViewModel(private val repository: AdminRepository) : BaseView
 
                     override fun onError(e: Throwable) {
                         stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
 
                 })
@@ -79,7 +79,7 @@ class AdminRequestsViewModel(private val repository: AdminRepository) : BaseView
 
                     override fun onError(e: Throwable) {
                         stopLoading()
-                        setError(e.message)
+                        setError(e)
                     }
 
                 })

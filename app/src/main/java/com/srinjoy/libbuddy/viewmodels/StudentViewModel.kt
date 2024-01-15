@@ -2,10 +2,13 @@ package com.srinjoy.libbuddy.viewmodels
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.provider.ContactsContract.CommonDataKinds.Email
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.srinjoy.libbuddy.application.LibraryApplication
+import com.srinjoy.libbuddy.core.Utils
 import com.srinjoy.libbuddy.data.repository.StudentRepository
 import com.srinjoy.libbuddy.data.service.LibraryApiService
 import com.srinjoy.libbuddy.models.Student
@@ -49,8 +52,10 @@ class StudentViewModel : ViewModel() {
                     loading.value = false
                 }
 
+
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onError(e: Throwable) {
-                    errorMessage.value = e.message.toString()
+                    errorMessage.value = Utils.getErrorMessage(e)
                     error.value = true
                     loading.value = false
 
@@ -85,8 +90,9 @@ class StudentViewModel : ViewModel() {
                     (activity.application as LibraryApplication).prefs.token = t.token
                 }
 
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onError(e: Throwable) {
-                    errorMessage.value = e.message.toString()
+                    errorMessage.value = Utils.getErrorMessage(e)
                     error.value = true
                     loading.value = false
                     e.printStackTrace()

@@ -40,7 +40,7 @@ class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewMo
                     }
 
                     override fun onError(e: Throwable) {
-                        setError(e.message)
+                        setError(e)
                         stopLoading()
                     }
 
@@ -67,7 +67,7 @@ class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewMo
                     }
 
                     override fun onError(e: Throwable) {
-                        setError(e.message)
+                        setError(e)
                         stopLoading()
                     }
 
