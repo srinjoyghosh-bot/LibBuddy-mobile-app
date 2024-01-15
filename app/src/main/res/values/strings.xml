@@ -57,4 +57,7 @@
     <string name="msg_book_returned">Book return successful</string>
     <string name="lbl_issue_date">Issue : %s</string>
     <string name="lbl_return_date">Return : %s</string>
+    <string name="msg_request_pending">Borrow request is pending</string>
+    <string name="msg_student_book_returned">Book has been returned</string>
+
 </resources>
