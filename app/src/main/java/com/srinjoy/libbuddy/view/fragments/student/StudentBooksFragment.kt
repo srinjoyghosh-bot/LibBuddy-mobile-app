@@ -1,10 +1,8 @@
 package com.srinjoy.libbuddy.view.fragments.student
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
@@ -20,8 +18,8 @@ import com.srinjoy.libbuddy.databinding.FragmentStudentBooksBinding
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.view.activities.StudentMainActivity
 import com.srinjoy.libbuddy.view.adapters.AllBooksAdapter
-import com.srinjoy.libbuddy.viewmodels.StudentBooksViewModel
-import com.srinjoy.libbuddy.viewmodels.StudentBooksViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.student.StudentBooksViewModel
+import com.srinjoy.libbuddy.viewmodels.student.StudentBooksViewModelFactory
 
 class StudentBooksFragment : Fragment() {
 

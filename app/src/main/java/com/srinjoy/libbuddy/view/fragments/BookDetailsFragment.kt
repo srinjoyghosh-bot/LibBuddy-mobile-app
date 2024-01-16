@@ -21,8 +21,8 @@ import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.view.activities.AddEditBookActivity
 import com.srinjoy.libbuddy.view.activities.AdminMainActivity
 import com.srinjoy.libbuddy.view.activities.StudentMainActivity
-import com.srinjoy.libbuddy.viewmodels.BookDetailsViewModel
-import com.srinjoy.libbuddy.viewmodels.BookDetailsViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.book.BookDetailsViewModel
+import com.srinjoy.libbuddy.viewmodels.book.BookDetailsViewModelFactory
 
 class BookDetailsFragment : Fragment() {
 

@@ -17,8 +17,8 @@ import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.core.Constants
 import com.srinjoy.libbuddy.databinding.ActivityAddEditBookBinding
 import com.srinjoy.libbuddy.models.Book
-import com.srinjoy.libbuddy.viewmodels.AddEditBookViewModel
-import com.srinjoy.libbuddy.viewmodels.AddEditBookViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.book.AddEditBookViewModel
+import com.srinjoy.libbuddy.viewmodels.book.AddEditBookViewModelFactory
 
 class AddEditBookActivity : AppCompatActivity() {
 

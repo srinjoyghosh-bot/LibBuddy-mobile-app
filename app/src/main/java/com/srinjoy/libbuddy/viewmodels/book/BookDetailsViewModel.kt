@@ -1,4 +1,4 @@
-package com.srinjoy.libbuddy.viewmodels
+package com.srinjoy.libbuddy.viewmodels.book
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
@@ -13,6 +13,7 @@ import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import com.srinjoy.libbuddy.view.activities.StudentMainActivity
 import com.srinjoy.libbuddy.view.fragments.BookDetailsFragment
+import com.srinjoy.libbuddy.viewmodels.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers

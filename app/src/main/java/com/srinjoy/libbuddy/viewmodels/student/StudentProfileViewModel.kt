@@ -1,4 +1,4 @@
-package com.srinjoy.libbuddy.viewmodels
+package com.srinjoy.libbuddy.viewmodels.student
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.data.repository.AdminRepository
-import com.srinjoy.libbuddy.data.repository.BookRepository
 import com.srinjoy.libbuddy.data.repository.StudentRepository
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.models.Student
 import com.srinjoy.libbuddy.view.fragments.student.StudentProfileFragment
+import com.srinjoy.libbuddy.viewmodels.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
