@@ -1,7 +1,6 @@
 package com.srinjoy.libbuddy.view.fragments.admin
 
 import android.app.Dialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -13,8 +12,8 @@ import androidx.fragment.app.viewModels
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.databinding.FragmentAdminBookReturnBinding
-import com.srinjoy.libbuddy.viewmodels.AdminBookReturnViewModel
-import com.srinjoy.libbuddy.viewmodels.AdminBookReturnViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.admin.AdminBookReturnViewModel
+import com.srinjoy.libbuddy.viewmodels.admin.AdminBookReturnViewModelFactory
 
 class AdminBookReturnFragment : Fragment() {
 

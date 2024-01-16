@@ -1,10 +1,8 @@
 package com.srinjoy.libbuddy.view.fragments.admin
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -22,10 +20,9 @@ import com.srinjoy.libbuddy.databinding.FragmentAdminBooksBinding
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.view.activities.AddEditBookActivity
 import com.srinjoy.libbuddy.view.activities.AdminMainActivity
-import com.srinjoy.libbuddy.view.activities.StudentMainActivity
 import com.srinjoy.libbuddy.view.adapters.AllBooksAdapter
-import com.srinjoy.libbuddy.viewmodels.AdminBooksViewModel
-import com.srinjoy.libbuddy.viewmodels.AdminBooksViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.admin.AdminBooksViewModel
+import com.srinjoy.libbuddy.viewmodels.admin.AdminBooksViewModelFactory
 
 class AdminBooksFragment : Fragment() {
 

@@ -11,11 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.databinding.FragmentAdminBinding
 import com.srinjoy.libbuddy.view.activities.AdminMainActivity
-import com.srinjoy.libbuddy.viewmodels.AdminViewModel
+import com.srinjoy.libbuddy.viewmodels.auth.AdminViewModel
 
 class AdminFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.srinjoy.libbuddy.viewmodels
+package com.srinjoy.libbuddy.viewmodels.auth
 
 import android.app.Activity
 import android.content.Context

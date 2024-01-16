@@ -1,4 +1,4 @@
-package com.srinjoy.libbuddy.viewmodels
+package com.srinjoy.libbuddy.viewmodels.admin
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,7 @@ import com.srinjoy.libbuddy.application.LibraryApplication
 import com.srinjoy.libbuddy.data.repository.AdminRepository
 import com.srinjoy.libbuddy.models.Admin
 import com.srinjoy.libbuddy.models.Book
+import com.srinjoy.libbuddy.viewmodels.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers

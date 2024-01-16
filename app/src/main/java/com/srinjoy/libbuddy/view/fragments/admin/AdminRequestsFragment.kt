@@ -2,7 +2,6 @@ package com.srinjoy.libbuddy.view.fragments.admin
 
 import android.app.Dialog
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,8 +17,8 @@ import com.srinjoy.libbuddy.databinding.FragmentAdminRequestsBinding
 import com.srinjoy.libbuddy.models.Book
 import com.srinjoy.libbuddy.view.adapters.IssueHistoryAdapter
 import com.srinjoy.libbuddy.view.adapters.SwipeCallback
-import com.srinjoy.libbuddy.viewmodels.AdminRequestsViewModel
-import com.srinjoy.libbuddy.viewmodels.AdminRequestsViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.admin.AdminRequestsViewModel
+import com.srinjoy.libbuddy.viewmodels.admin.AdminRequestsViewModelFactory
 
 class AdminRequestsFragment : Fragment() {
 

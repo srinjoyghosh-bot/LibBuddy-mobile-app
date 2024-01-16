@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.srinjoy.libbuddy.R
 import com.srinjoy.libbuddy.databinding.FragmentStudentBinding
 import com.srinjoy.libbuddy.view.activities.StudentMainActivity
-import com.srinjoy.libbuddy.viewmodels.StudentViewModel
+import com.srinjoy.libbuddy.viewmodels.auth.StudentViewModel
 
 class StudentFragment : Fragment() {
 

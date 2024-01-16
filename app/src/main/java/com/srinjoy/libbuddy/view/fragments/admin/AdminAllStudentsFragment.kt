@@ -1,7 +1,5 @@
 package com.srinjoy.libbuddy.view.fragments.admin
 
-import android.app.Dialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,8 +20,8 @@ import com.srinjoy.libbuddy.databinding.FragmentAdminAllStudentsBinding
 import com.srinjoy.libbuddy.models.Student
 import com.srinjoy.libbuddy.view.activities.AdminMainActivity
 import com.srinjoy.libbuddy.view.adapters.StudentsAdapter
-import com.srinjoy.libbuddy.viewmodels.AdminAllStudentsViewModel
-import com.srinjoy.libbuddy.viewmodels.AdminAllStudentsViewModelFactory
+import com.srinjoy.libbuddy.viewmodels.admin.AdminAllStudentsViewModel
+import com.srinjoy.libbuddy.viewmodels.admin.AdminAllStudentsViewModelFactory
 
 class AdminAllStudentsFragment : Fragment() {
 

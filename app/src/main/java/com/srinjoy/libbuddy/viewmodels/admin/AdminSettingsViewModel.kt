@@ -1,4 +1,4 @@
-package com.srinjoy.libbuddy.viewmodels
+package com.srinjoy.libbuddy.viewmodels.admin
 
 import androidx.lifecycle.ViewModel
 
