@@ -21,9 +21,9 @@ object Constants {
     const val STUDENT_LOGIN_KEY: String = "student_login_key"
     const val ADMIN_LOGIN_KEY: String = "admin_login_key"
     const val TOKEN_KEY: String = "token_key"
+    const val LOAD_BOOKS_KEY="load_books"
     const val TOKEN_HEADER: String = "Authorization"
     const val EXTRA_BOOK_DETAILS: String = "book"
-    const val EXTRA_LOAD_BOOKS: String = "load_books"
     const val EXTRA_STUDENT_ID="student_id"
     const val REQUEST_CODE_EDIT_BOOK: Int = 101
 }

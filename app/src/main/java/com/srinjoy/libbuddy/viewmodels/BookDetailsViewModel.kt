@@ -83,6 +83,7 @@ class BookDetailsViewModel(
                 .subscribeWith(object : DisposableSingleObserver<Book.SingleMessageResponseModel>() {
                     override fun onSuccess(t: Book.SingleMessageResponseModel) {
                         stopLoading()
+                        (fragment.activity?.application as LibraryApplication?)!!.prefs.loadBooks=true
                         deleteSuccess.value=true
                     }
 

@@ -20,4 +20,8 @@ class SharedPrefs(context: Context) {
     var token: String?
         get() = preferences.getString(Constants.TOKEN_KEY, null)
         set(value) = preferences.edit().putString(Constants.TOKEN_KEY, value).apply()
+
+    var loadBooks: Boolean
+        get() = preferences.getBoolean(Constants.LOAD_BOOKS_KEY, false)
+        set(value) = preferences.edit().putBoolean(Constants.LOAD_BOOKS_KEY, value).apply()
 }

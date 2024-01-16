@@ -176,6 +176,13 @@ class AdminBooksFragment : Fragment() {
         if (requireActivity() is AdminMainActivity) {
             (requireActivity() as AdminMainActivity?)!!.showBottomNavigationView()
         }
+        if((requireActivity().application as LibraryApplication).prefs.loadBooks){
+            Log.i("Books load karo","Karta hu")
+            mViewModel.getAllBooks()
+            (requireActivity().application as LibraryApplication).prefs.loadBooks=false
+        }else{
+            Log.i("Books load mt karo","Theek h bhai")
+        }
     }
 
     fun goToBookDetails(book: Book.Book) {

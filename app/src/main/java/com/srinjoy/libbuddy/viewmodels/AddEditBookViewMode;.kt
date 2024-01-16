@@ -35,6 +35,7 @@ class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewMo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Book.ResponseModel>() {
                     override fun onSuccess(t: Book.ResponseModel) {
+                        (activity.application as LibraryApplication).prefs.loadBooks=true
                         setSuccess()
                         stopLoading()
                     }
@@ -61,6 +62,7 @@ class AddEditBookViewModel(private val repository: AdminRepository) : BaseViewMo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Book.ResponseModel>() {
                     override fun onSuccess(t: Book.ResponseModel) {
+                        (activity.application as LibraryApplication).prefs.loadBooks=true
                         book.value=editedBook
                         setSuccess()
                         stopLoading()
